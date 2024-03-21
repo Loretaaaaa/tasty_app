@@ -20,10 +20,11 @@ app.get('/meals', async (req, res) => {
   res.json(JSON.parse(meals));
 });
 
+
 app.post('/orders', async (req, res) => {
   const orderData = req.body.order;
 
-  if (orderData === null || orderData.items === null || orderData.items === []) {
+  if (orderData === null || orderData.items === null || orderData.items.length === 0) {
     return res
       .status(400)
       .json({ message: 'Missing data.' });
@@ -66,4 +67,6 @@ app.use((req, res) => {
   res.status(404).json({ message: 'Not found' });
 });
 
-app.listen(3000);
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
